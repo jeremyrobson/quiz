@@ -1,6 +1,6 @@
 var quiz = [];
 var stage = 0;
-var checkdindex = -1;
+var checkedindex = -1;
 var state = "quiz";
 var audios = [];
 var loading = 0;
@@ -70,7 +70,7 @@ function load_question() {
         var i = $(".labelanswer").index(this);
         quiz[stage]["answers"][i]["audio"].play();
     });
-    $("#picturediv").html("<img src='" + quiz[stage]["answer"] + ".png'>");
+    $("#picturediv").html("<img src='" + quiz[stage]["answer"] + ".jpg'>");
 }
 
 function load_score() {
@@ -81,17 +81,26 @@ function load_score() {
     $("#tallydiv").html(s);
 }
 
+function load_complete(audio) {
+    loading--;
+    console.log("Loaded audio No. " + loading);
+    if (loading == 0) { //all sounds are preloaded
+        //for (var i=0;i<audios.length;i++)
+        //    audios[i].removeEventListener("canplaythrough", load_complete, false);
+        audio.oncanplay = null;
+        reset_quiz();
+    }
+}
+
 function load_audio(name) {
     loading++;
     var audio = document.createElement("audio");
-    audio.loop = false;
-    audio.addEventListener("canplaythrough", function() {
-        loading--;
-        if (loading == 0) //all sounds are preloaded
-            reset_quiz();
-    }, false);
-    audio.src = name + ".wav";
     audios.push(audio);
+    audio.loop = false;
+    audio.preload = "auto";
+    //audio.addEventListener("canplay", load_complete, false);
+    audio.oncanplay = function() { load_complete(audio); };
+    audio.src = name + ".mp3";
 }
 
 function reset_quiz() {
@@ -121,7 +130,6 @@ function reset_quiz() {
         quiz[i]["answers"][correctindex] = questions[q];
         quiz[i]["answers"][correctindex]["audio"] = audios[q];
     }
-    
     draw();
 }
 
