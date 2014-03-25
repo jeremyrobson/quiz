@@ -2,6 +2,7 @@
 <html><head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+<script src="http://192.168.0.105:8080/target/target-script-min.js#anonymous"></script> 
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 <style>
@@ -18,7 +19,14 @@ h1 {
 
 h2 {
     font-family: sans-serif;
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: normal;
+    color: #333;
+}
+
+h4 {
+    font-family: sans-serif;
+    font-size: 12px;
     font-weight: normal;
     color: #333;
 }
@@ -41,23 +49,31 @@ $(document).ready(function() {
     <h1>Animal Sounds Quiz</h1>
   </div>
  
-  <div id="quizdiv" data-role="main" class="ui-content">
-    <form id="quizform" name="quizform">
+  <div id="quizdiv" data-role="content" class="ui-content">
+    <div id="quizform" name="quizform">
       <div id="scorediv" align="right"></div>
       <fieldset id="fieldset" data-role="controlgroup">
         <legend id="legend">Question</legend>
         <div id="picturediv"></div>
-        <label id="label0" for="radio1" class="labelanswer"><input type="radio" id="radio0" name="radioanswer" class="radioanswer" value="0" />Answer 0</label>
-        <label id="label1" for="radio2" class="labelanswer"><input type="radio" id="radio1" name="radioanswer" class="radioanswer" value="1" />Answer 1</label>
-        <label id="label2" for="radio3" class="labelanswer"><input type="radio" id="radio2" name="radioanswer" class="radioanswer" value="2" />Answer 2</label>
-        <label id="label3" for="radio4" class="labelanswer"><input type="radio" id="radio3" name="radioanswer" class="radioanswer" value="3" />Answer 3</label>
+        <input type="radio" id="radio0" name="radioanswer" class="radioanswer" value="0" />
+        <label id="label0" for="radio0" class="labelanswer">Answer 0</label>
+        <input type="radio" id="radio1" name="radioanswer" class="radioanswer" value="1" />
+        <label id="label1" for="radio1" class="labelanswer">Answer 1</label>
+        <input type="radio" id="radio2" name="radioanswer" class="radioanswer" value="2" />
+        <label id="label2" for="radio2" class="labelanswer">Answer 2</label>
+        <input type="radio" id="radio3" name="radioanswer" class="radioanswer" value="3" />
+        <label id="label3" for="radio3" class="labelanswer">Answer 3</label>
       </fieldset>
       <button type="button" id="submitbutton" data-inline="true" onclick="submit_answer()">Submit</button>
-    </form>
+    </div>
     <div id="donediv" style="display:none">
       <div id="tallydiv"></div>
       <button type="button" id="resetbutton" data-inline="true" onclick="reset_quiz()">Reset</button>
     </div>
+  </div>
+  
+  <div id="quizfooter" data-role="footer">
+    <h4>Coded by Jeremy Robson http://www.jeremyrobson.com</h4>
   </div>
 </div>
 
